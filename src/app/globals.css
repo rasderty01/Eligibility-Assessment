@@ -1,6 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* src/app/globals.css */
+
+@import "react-toastify/dist/ReactToastify.css";
+
+/* Add your global styles here */
+
+/* ...rest of the styles */
 
 :root {
   --foreground-rgb: 0, 0, 0;
