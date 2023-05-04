@@ -15,7 +15,7 @@ type Inputs = {
   incomeRange?: string;
 };
 
-const VisitVisaForm = () => {
+const FianceVisa = () => {
   const {
     register,
     handleSubmit,
@@ -60,7 +60,7 @@ const VisitVisaForm = () => {
             })}
             className={`px-4 py-2 mt-1 text-sm border ${
               errors.firstName ? "border-red-600" : "border-gray-300"
-            } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300 transition duration-300 ease-in-out`}
+            } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300`}
           />
           {errors.firstName && (
             <p className="mt-1 text-xs text-red-600">
@@ -82,9 +82,9 @@ const VisitVisaForm = () => {
             {...register("lastName", {
               required: "Last name is required",
             })}
-            className={`text-sm form-input ${
+            className={`px-4 py-2 mt-1 text-sm border ${
               errors.lastName ? "border-red-600" : "border-gray-300"
-            } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300 transition duration-300 ease-in-out`}
+            } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300`}
           />
           {errors.lastName && (
             <p className="mt-1 text-xs text-red-600">
@@ -109,7 +109,7 @@ const VisitVisaForm = () => {
             })}
             className={`px-4 py-2 mt-1 text-sm border ${
               errors.email ? "border-red-600" : "border-gray-300"
-            } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300 transition duration-300 ease-in-out`}
+            } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300`}
           />
           {errors.email && (
             <p className="mt-1 text-xs text-red-600">{errors.email.message}</p>
@@ -131,7 +131,7 @@ const VisitVisaForm = () => {
             })}
             className={`px-4 py-2 mt-1 text-sm border ${
               errors.whatsappNumber ? "border-red-600" : "border-gray-300"
-            } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300 transition duration-300 ease-in-out`}
+            } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300`}
           />
           {errors.whatsappNumber && (
             <p className="mt-1 text-xs text-red-600">
@@ -150,7 +150,7 @@ const VisitVisaForm = () => {
           <select
             id="yesNoQuestion"
             placeholder="Select an Option"
-            className=" w-full px-4 py-2 mt-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300 transition duration-300 ease-in-out"
+            className="block w-full px-4 py-2 mt-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300"
             {...register("yesNoQuestion", { required: true })}
           >
             <option disabled defaultValue={""}>
@@ -173,7 +173,7 @@ const VisitVisaForm = () => {
                 id="RelationshipWithSponsor"
                 placeholder="Select an Option"
                 {...register("RelationshipWithSponsor", { required: true })}
-                className=" w-full px-4 py-2 mt-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-300 ease-in-out hover:border-sky-300"
+                className="block w-full px-4 py-2 mt-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300"
               >
                 <option value="Family">Family</option>
                 <option value="Partner">Partner</option>
@@ -192,7 +192,7 @@ const VisitVisaForm = () => {
                 id="metWithSponsor"
                 placeholder="Select an Option"
                 {...register("metWithSponsor", { required: true })}
-                className=" w-full px-4 py-2 mt-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-300 ease-in-out hover:border-sky-300"
+                className="block w-full px-4 py-2 mt-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300"
               >
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
@@ -209,7 +209,7 @@ const VisitVisaForm = () => {
                 id="ApplicantSourceOfIncome"
                 placeholder="Select an Option"
                 {...register("ApplicantSourceOfIncome", { required: true })}
-                className=" w-full px-4 py-2 mt-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-300 ease-in-out hover:border-sky-300"
+                className="block w-full px-4 py-2 mt-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300"
               >
                 <option value="Employment (more than a year)">
                   Employment (more than a year)
@@ -237,7 +237,7 @@ const VisitVisaForm = () => {
                 id="SponsorSourceOfIncome"
                 placeholder="Select an Option"
                 {...register("SponsorSourceOfIncome", { required: true })}
-                className="w-full px-4 py-2 mt-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-300 ease-in-out hover:border-sky-300"
+                className="block w-full px-4 py-2 mt-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300"
               >
                 <option value="Pension">Pension</option>
                 <option value="Employment">Employment</option>
@@ -261,7 +261,7 @@ const VisitVisaForm = () => {
                 id="incomeRange"
                 placeholder="Select an Option"
                 {...register("incomeRange", { required: true })}
-                className="block w-full px-4 py-2 mt-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-300 ease-in-out hover:border-sky-300"
+                className="block w-full px-4 py-2 mt-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300"
               >
                 <option value="₱10,000-₱20,000">₱10,000-₱20,000</option>
                 <option value="₱21,000-₱40,000">₱21,000-₱40,000</option>
@@ -273,7 +273,7 @@ const VisitVisaForm = () => {
 
         <button
           type="submit"
-          className="w-auto px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none transition duration-300 ease-in-out focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
+          className="w-auto px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
         >
           Submit
         </button>
@@ -282,4 +282,4 @@ const VisitVisaForm = () => {
   );
 };
 
-export default VisitVisaForm;
+export default FianceVisa;
