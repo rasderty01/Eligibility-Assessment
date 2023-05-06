@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -12,7 +13,7 @@ type Inputs = {
   PlaceOfMarriage?: string;
   ApplicantSourceOfIncome?: string;
   SponsorSourceOfIncome?: string;
-  incomeRange?: string;
+  SpousalBenefits?: string;
 };
 
 const SpousalVisa = () => {
@@ -28,11 +29,11 @@ const SpousalVisa = () => {
       email: "",
       whatsappNumber: "",
       financialRequirement: "",
-      DateofMarriage: "Pick A Date",
+      DateofMarriage: "",
       PlaceOfMarriage: "",
       ApplicantSourceOfIncome: "",
       SponsorSourceOfIncome: "",
-      incomeRange: "",
+      SpousalBenefits: "",
     },
   });
 
@@ -228,50 +229,49 @@ const SpousalVisa = () => {
             <option value="Unemployed/Student">Unemployed/Student</option>
           </select>
         </div>
-        <div className="flex flex-col mt-1">
-          <label
-            htmlFor="SponsorSourceOfIncome"
-            className="text-sm font-medium text-gray-700"
-          >
-            What's your Sponsor's source of income?
-          </label>
-          <select
-            id="SponsorSourceOfIncome"
-            placeholder="Select an Option"
-            {...register("SponsorSourceOfIncome", { required: true })}
-            className="block w-full px-4 py-2 mt-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300"
-          >
-            <option value="Pension">Pension</option>
-            <option value="Employment">Employment</option>
-            <option value="Business/Self-employed">
-              Business/Self-employed
-            </option>
-            <option value="On Benefits">On Benefits</option>
-          </select>
-        </div>
 
-        <div className="flex flex-col">
-          <label
-            htmlFor="incomeRange"
-            className="text-sm font-medium text-gray-700"
-          >
-            What's your income range?
-          </label>
-          <select
-            id="incomeRange"
-            placeholder="Select an Option"
-            {...register("incomeRange", { required: true })}
-            className="block w-full px-4 py-2 mt-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300"
-          >
-            <option value="₱10,000-₱20,000">₱10,000-₱20,000</option>
-            <option value="₱21,000-₱40,000">₱21,000-₱40,000</option>
-            <option value="₱40,000 above">₱40,000 above</option>
-          </select>
+        <div className="space-y-4">
+          <div className="flex flex-col mt-1">
+            <label
+              htmlFor="SponsorSourceOfIncome"
+              className="text-sm font-medium text-gray-700"
+            >
+              {"What's your Sponsor's source of income?"}
+            </label>
+            <select
+              id="SponsorSourceOfIncome"
+              placeholder="Select an Option"
+              {...register("SponsorSourceOfIncome", { required: true })}
+              className="block w-full px-4 py-2 mt-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300"
+            >
+              <option value="Pension">Pension</option>
+              <option value="Employment">Employment</option>
+              <option value="Business/Self-employed">
+                Business/Self-employed
+              </option>
+              <option value="On Benefits">On Benefits</option>
+            </select>
+          </div>
+          {watch("SponsorSourceOfIncome") === "On Benefits" ? (
+            <div className="flex flex-col mt-1">
+              <label
+                htmlFor="SpousalBenefits"
+                className="text-sm font-medium text-gray-700"
+              >
+                What type of benefits does your Sponsor receive?
+              </label>
+              <input
+                type="text"
+                id="SpousalBenefits"
+                {...register("SpousalBenefits", { required: true })}
+                className="block w-full px-4 py-2 mt-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300"
+              />
+            </div>
+          ) : null}
         </div>
-
         <button
           type="submit"
-          className="w-auto px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
+          className="w-auto px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none transition duration-300 ease-in-out focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
         >
           Submit
         </button>

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -7,12 +8,12 @@ type Inputs = {
   lastName: string;
   email: string;
   whatsappNumber: string;
-  yesNoQuestion: string;
+  MaritalStatus: string;
   RelationshipWithSponsor?: string;
   metWithSponsor?: string;
-  ApplicantSourceOfIncome?: string;
-  SponsorSourceOfIncome?: string;
-  incomeRange?: string;
+  FianceFinancialRequirement?: string;
+  FianceSponsorMaritalStatus?: string;
+  FianceSponsorSourceOfIncome?: string;
 };
 
 const FianceVisa = () => {
@@ -27,12 +28,12 @@ const FianceVisa = () => {
       lastName: "",
       email: "",
       whatsappNumber: "",
-      yesNoQuestion: "",
+      MaritalStatus: "",
       RelationshipWithSponsor: "",
       metWithSponsor: "",
-      ApplicantSourceOfIncome: "",
-      SponsorSourceOfIncome: "",
-      incomeRange: "",
+      FianceFinancialRequirement: "",
+      FianceSponsorMaritalStatus: "",
+      FianceSponsorSourceOfIncome: "",
     },
   });
 
@@ -142,138 +143,118 @@ const FianceVisa = () => {
 
         <div className="flex flex-col">
           <label
-            htmlFor="yesNoQuestion"
+            htmlFor="MaritalStatus"
             className="text-sm font-medium text-gray-700"
           >
-            Are you applying with a Sponsor?
+            What's your Marital Status?
           </label>
           <select
-            id="yesNoQuestion"
+            id="MaritalStatus"
             placeholder="Select an Option"
             className="block w-full px-4 py-2 mt-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300"
-            {...register("yesNoQuestion", { required: true })}
+            {...register("MaritalStatus", { required: true })}
           >
             <option disabled defaultValue={""}>
               Select an Option
             </option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
+            <option value="Single">Single</option>
+            <option value="Divorce/Anulled">Divorce/Anulled</option>
+            <option value="Married">Married</option>
           </select>
         </div>
-        {watch("yesNoQuestion") === "yes" ? (
-          <div className="space-y-4">
-            <div className="flex flex-col">
-              <label
-                htmlFor="RelationshipWithSponsor"
-                className="text-sm font-medium text-gray-700"
-              >
-                What's your relationship with the Sponsor?
-              </label>
-              <select
-                id="RelationshipWithSponsor"
-                placeholder="Select an Option"
-                {...register("RelationshipWithSponsor", { required: true })}
-                className="block w-full px-4 py-2 mt-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300"
-              >
-                <option value="Family">Family</option>
-                <option value="Partner">Partner</option>
-                <option value="Friends">Friends</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-            <div className="flex flex-col">
-              <label
-                htmlFor="metWithSponsor"
-                className="text-sm font-medium text-gray-700"
-              >
-                Have you already met the Sponsor in person?
-              </label>
-              <select
-                id="metWithSponsor"
-                placeholder="Select an Option"
-                {...register("metWithSponsor", { required: true })}
-                className="block w-full px-4 py-2 mt-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300"
-              >
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-              </select>
-            </div>
-            <div className="flex flex-col">
-              <label
-                htmlFor="ApplicantSourceOfIncome"
-                className="text-sm font-medium text-gray-700"
-              >
-                What's your source of income?
-              </label>
-              <select
-                id="ApplicantSourceOfIncome"
-                placeholder="Select an Option"
-                {...register("ApplicantSourceOfIncome", { required: true })}
-                className="block w-full px-4 py-2 mt-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300"
-              >
-                <option value="Employment (more than a year)">
-                  Employment (more than a year)
-                </option>
-                <option value="Employment (less than a year)">
-                  Employment (less than a year)
-                </option>
-                <option value="Business (more than a year)">
-                  Business (more than a year)
-                </option>
-                <option value="Business (less than a year)">
-                  Business (less than a year)
-                </option>
-                <option value="Unemployed/Student">Unemployed/Student</option>
-              </select>
-            </div>
-            <div className="flex flex-col mt-1">
-              <label
-                htmlFor="SponsorSourceOfIncome"
-                className="text-sm font-medium text-gray-700"
-              >
-                What's your Sponsor's source of income?
-              </label>
-              <select
-                id="SponsorSourceOfIncome"
-                placeholder="Select an Option"
-                {...register("SponsorSourceOfIncome", { required: true })}
-                className="block w-full px-4 py-2 mt-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300"
-              >
-                <option value="Pension">Pension</option>
-                <option value="Employment">Employment</option>
-                <option value="Business/Self-employed">
-                  Business/Self-employed
-                </option>
-                <option value="On Benefits">On Benefits</option>
-              </select>
-            </div>
-          </div>
-        ) : watch("yesNoQuestion") === "no" ? (
-          <>
-            <div className="flex flex-col">
-              <label
-                htmlFor="incomeRange"
-                className="text-sm font-medium text-gray-700"
-              >
-                What's your income range?
-              </label>
-              <select
-                id="incomeRange"
-                placeholder="Select an Option"
-                {...register("incomeRange", { required: true })}
-                className="block w-full px-4 py-2 mt-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300"
-              >
-                <option value="₱10,000-₱20,000">₱10,000-₱20,000</option>
-                <option value="₱21,000-₱40,000">₱21,000-₱40,000</option>
-                <option value="₱40,000 above">₱40,000 above</option>
-              </select>
-            </div>
-          </>
-        ) : null}
+
+        <div className="flex flex-col">
+          <label
+            htmlFor="metWithSponsor"
+            className="text-sm font-medium text-gray-700"
+          >
+            Have you met your sponsor in person?
+          </label>
+          <select
+            id="metWithSponsor"
+            placeholder="Select an Option"
+            className="block w-full px-4 py-2 mt-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300"
+            {...register("metWithSponsor", { required: true })}
+          >
+            <option disabled defaultValue={""}>
+              Select an Option
+            </option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+
+        <div className="flex flex-col">
+          <label
+            htmlFor="FianceFinancialRequirement"
+            className="text-sm font-medium text-gray-700"
+          >
+            Have you met the financial requirement of £18,600?
+          </label>
+          <select
+            id="FianceFinancialRequirement"
+            placeholder="Select an Option"
+            className="block w-full px-4 py-2 mt-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300"
+            {...register("FianceFinancialRequirement", { required: true })}
+          >
+            <option disabled defaultValue={""}>
+              Select an Option
+            </option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+
+        <div className="flex flex-col">
+          <label
+            htmlFor="FianceSponsorMaritalStatus"
+            className="text-sm font-medium text-gray-700"
+          >
+            What's the Sponsor's Marital Status?
+          </label>
+          <select
+            id="FianceSponsorMaritalStatus"
+            placeholder="Select an Option"
+            className="block w-full px-4 py-2 mt-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300"
+            {...register("FianceSponsorMaritalStatus", { required: true })}
+          >
+            <option disabled defaultValue={""}>
+              Select an Option
+            </option>
+            <option value="Single">Single</option>
+            <option value="Divorce/Anulled">Divorce/Anulled</option>
+            <option value="Married">Married</option>
+          </select>
+        </div>
+
+        <div className="flex flex-col">
+          <label
+            htmlFor="FianceSponsorSourceOfIncome"
+            className="text-sm font-medium text-gray-700"
+          >
+            What's the Sponsor's Source of Income?
+          </label>
+          <select
+            id="FianceSponsorSourceOfIncome"
+            placeholder="Select an Option"
+            className="block w-full px-4 py-2 mt-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent hover:border-sky-300"
+            {...register("FianceSponsorSourceOfIncome", { required: true })}
+          >
+            <option disabled defaultValue={""}>
+              Select an Option
+            </option>
+            <option value="Pension">Pension</option>
+            <option value="Employment">Employment</option>
+            <option value="Business/Self-employed">
+              Business/Self-employed
+            </option>
+            <option value="On Benefits">On Benefits</option>
+          </select>
+        </div>
 
         <button
           type="submit"
-          className="w-auto px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
+          className="w-auto px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none transition duration-300 ease-in-out focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
         >
           Submit
         </button>

@@ -167,7 +167,7 @@ const VisitVisaForm = () => {
                 htmlFor="RelationshipWithSponsor"
                 className="text-sm font-medium text-gray-700"
               >
-                What's your relationship with the Sponsor?
+                {"What's your relationship with the Sponsor?"}
               </label>
               <select
                 id="RelationshipWithSponsor"
@@ -203,7 +203,7 @@ const VisitVisaForm = () => {
                 htmlFor="ApplicantSourceOfIncome"
                 className="text-sm font-medium text-gray-700"
               >
-                What's your source of income?
+                {"What's your source of income?"}
               </label>
               <select
                 id="ApplicantSourceOfIncome"
@@ -231,7 +231,7 @@ const VisitVisaForm = () => {
                 htmlFor="SponsorSourceOfIncome"
                 className="text-sm font-medium text-gray-700"
               >
-                What's your Sponsor's source of income?
+                {"What's your Sponsor's source of income?"}
               </label>
               <select
                 id="SponsorSourceOfIncome"
@@ -255,7 +255,7 @@ const VisitVisaForm = () => {
                 htmlFor="incomeRange"
                 className="text-sm font-medium text-gray-700"
               >
-                What's your income range?
+                {"What's your income range?"}
               </label>
               <select
                 id="incomeRange"

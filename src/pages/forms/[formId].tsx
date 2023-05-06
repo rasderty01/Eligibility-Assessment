@@ -12,7 +12,7 @@ const formMapping = {
     component: VisitVisaForm,
   },
   "2": {
-    title: "Fiañce Visa",
+    title: "Fiancé Visa",
     component: FianceVisa,
   },
   "3": {
@@ -52,12 +52,27 @@ const FormPage = () => {
     return <FormComponent />;
   };
 
+  const BacktoMainPage = () => {
+    router.push("/forms");
+  };
+
   return (
     <div className="bg-gray-100 min-h-screen">
       <div className="container mx-auto py-12">
+        <button
+          name="backButton"
+          aria-label="backButton"
+          id="backButton"
+          type="button"
+          onClick={BacktoMainPage}
+          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-300"
+        >
+          Back
+        </button>
         <h1 className="text-3xl font-bold mb-6 text-center">
           {formDetails?.title} Form
         </h1>
+
         {renderForm()}
       </div>
     </div>

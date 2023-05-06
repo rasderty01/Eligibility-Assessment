@@ -39,8 +39,12 @@ const forms = [
 const FormsPage = () => {
   return (
     <div className="bg-slate-700 min-h-screen text-center items-center @container @xs:bg-green-50">
-      <div className=" mx-auto py-12 @sm:text-green-200 @xs:text-blue-400">
-        <h1 className="text-3xl font-bold mb-6">
+      <div
+        className=" mx-auto py-12 @sm:text-green-700
+
+       @xs:text-blue-400"
+      >
+        <h1 className="text-3xl font-bold mb-6 text-green-300">
           Eligibility Assessment Forms
         </h1>
         <div className="flex flex-wrap justify-center">
