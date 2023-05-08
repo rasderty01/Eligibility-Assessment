@@ -1,5 +1,12 @@
 "use client";
 
+import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import React, { useState } from "react";
+import { BeatLoader } from "react-spinners";
+
+
 import { useForm, SubmitHandler } from "react-hook-form";
 
 type Inputs = {
@@ -16,6 +23,8 @@ type Inputs = {
 };
 
 const VisitVisaForm = () => {
+const [isLoading, setIsLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -36,7 +45,23 @@ const VisitVisaForm = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+
+    setIsLoading(true);
+    console.log(data);
+    try {
+      const response = await axios.post("/api/submitForm", data);
+      console.log(response.data);
+      toast.success("Very Good");
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error);
+      console.log(error);
+      toast.error("Failed to submit the form. Please try again.");
+      setIsLoading(false);
+      // Handle error, e.g., show an error message
+    }
+  };
 
   return (
     <div className="flex flex-col items-center">
@@ -271,12 +296,16 @@ const VisitVisaForm = () => {
           </>
         ) : null}
 
-        <button
-          type="submit"
-          className="w-auto px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none transition duration-300 ease-in-out focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
-        >
-          Submit
-        </button>
+        {isLoading ? (
+          <BeatLoader size={10} color="#123abc" loading={isLoading} />
+        ) : (
+          <button
+            type="submit"
+            className="w-auto px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none transition duration-300 ease-in-out focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
+          >
+            Submit
+          </button>
+        )}
       </form>
     </div>
   );
