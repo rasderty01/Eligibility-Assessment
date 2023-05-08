@@ -12,6 +12,7 @@ export default async function handler(
     firstname: req.body.firstName,
     lastname: req.body.lastName,
     hs_whatsapp_phone_number: req.body.whatsappNumber,
+    hubspot_owner_id: "805242080",
   };
 
   const SimplePublicObjectInputForCreate = { properties, associations: [] };
@@ -33,11 +34,10 @@ export default async function handler(
         SimplePublicObjectInputForCreate,
         { headers }
       );
-      console.log (apiResponse)
       res.status(200).json(apiResponse.data);
     } catch (error) {
       res.status(500).json({ error });
-      console.log("Error generated", );
+      console.log("Error generated");
     }
   } else {
     res.setHeader("Allow", ["POST"]);
