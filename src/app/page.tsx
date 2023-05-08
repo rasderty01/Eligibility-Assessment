@@ -1,4 +1,3 @@
-import dynamic from "next/dynamic";
 import RootLayout from "./layout";
 import FormsPage from "@/pages/forms";
 
