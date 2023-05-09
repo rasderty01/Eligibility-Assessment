@@ -1,10 +1,5 @@
 "use client";
 
-import axios from "axios";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import React, { useEffect, useState } from "react";
-import { BeatLoader, GridLoader } from "react-spinners";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 type Inputs = {
@@ -21,17 +16,6 @@ type Inputs = {
 };
 
 const VisitVisaForm = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [initialLoading, setInitialLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setInitialLoading(false);
-    }, 2000); // 1000ms or 1 second, adjust the delay as needed
-
-    return () => clearTimeout(timer);
-  }, []);
-
   const {
     register,
     handleSubmit,
@@ -52,21 +36,7 @@ const VisitVisaForm = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    setIsLoading(true);
-    try {
-      const createcontact = await axios.post("/api/submitForm", data);
-      const contactId = createcontact.data.id;
-      const withID = { ...data, contactId };
-      const createtask = await axios.post("/api/createTask", withID);
-      toast.success("Sucessfully submitted the form!");
-      setIsLoading(false);
-    } catch (error) {
-      toast.error("Failed to submit the form. Please try again.");
-      setIsLoading(false);
-      // Handle error, e.g., show an error message
-    }
-  };
+  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
   return (
     <div className="flex flex-col items-center">
@@ -314,18 +284,13 @@ const VisitVisaForm = () => {
             </>
           ) : null}
 
-          {isLoading ? (
-            <BeatLoader size={10} color="#123abc" loading={isLoading} />
-          ) : (
-            <button
-              type="submit"
-              className="w-auto px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none transition duration-300 ease-in-out focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
-            >
-              Submit
-            </button>
-          )}
-        </form>
-      )}
+        <button
+          type="submit"
+          className="w-auto px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none transition duration-300 ease-in-out focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
+        >
+          Submit
+        </button>
+      </form>
     </div>
   );
 };
