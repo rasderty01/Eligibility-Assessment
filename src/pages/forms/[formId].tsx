@@ -1,3 +1,5 @@
+//
+
 import { useRouter } from "next/router";
 import VisitVisaForm from "../../components/VisitVisaForm";
 import { useEffect, useState } from "react";
@@ -5,6 +7,8 @@ import FianceVisa from "@/components/FianceVisa";
 import SpousalVisa from "@/components/SpousalVisa";
 import MarriageVisa from "@/components/MarriageVisa";
 import UnmarriedVistVisa from "@/components/UnmarriedVisitVisa";
+import { backButton, h1element } from "@/utils/formstyles";
+import { BarLoader } from "react-spinners";
 
 const formMapping = {
   "1": {
@@ -27,8 +31,6 @@ const formMapping = {
     title: "Unmarried Visit Visa",
     component: UnmarriedVistVisa,
   },
-
-  // Add other forms here
 };
 
 const FormPage = () => {
@@ -56,25 +58,38 @@ const FormPage = () => {
     router.push("/forms");
   };
 
-  return (
-    <div className="bg-white min-h-screen">
-      <div className="container mx-auto py-12">
-        <button
-          name="backButton"
-          aria-label="backButton"
-          id="backButton"
-          type="button"
-          onClick={BacktoMainPage}
-          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition-all ease-in-out duration-300"
-        >
-          Back
-        </button>
-        <h1 className="text-3xl font-bold mb-6 text-center">
-          {formDetails?.title} Form
-        </h1>
+  const [initialLoading, setInitialLoading] = useState(true);
 
-        {renderForm()}
-      </div>
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setInitialLoading(false);
+    }, 2000); // 1000ms or 1 second, adjust the delay as needed
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
+      {initialLoading ? (
+        <BarLoader color="#36d7b7" height={10} width={200} className="my-10" />
+      ) : (
+        <div className="bg-white dark:bg-gray-700 p-8 rounded-lg shadow-md w-full xs:max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg 2xl:max-w-2xl mx-auto ">
+          <button
+            name="backButton"
+            aria-label="backButton"
+            id="backButton"
+            type="button"
+            onClick={BacktoMainPage}
+            className={backButton}
+          >
+            Back to Main
+          </button>
+
+          <h1 className={h1element}>{formDetails?.title} Form</h1>
+
+          {renderForm()}
+        </div>
+      )}
     </div>
   );
 };

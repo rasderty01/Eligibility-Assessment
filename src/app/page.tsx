@@ -1,3 +1,4 @@
+import Booking from "@/pages/booking";
 import RootLayout from "./layout";
 import FormsPage from "@/pages/forms";
 

@@ -7,18 +7,30 @@ export default async function handler(
 ) {
   const { method, body } = req;
 
-  const hs_task_body = `
-<strong><br>First Name: ${req.body.firstName}</br>
-<br>Last Name: ${req.body.lastName}</br>
-<br>Email: ${req.body.email}</br>
-<br>WhatsApp Number: ${req.body.whatsappNumber}</br>
-<br>Applying with Sponsor: ${req.body.yesNoQuestion}</br>
-<br>Relationship With Sponsor: ${req.body.RelationshipWithSponsor}</br>
-<br>Met With Sponsor: ${req.body.metWithSponsor}</br>
-<br>Applicant Source of Income: ${req.body.ApplicantSourceOfIncome}</br>
-<br>Sponsor Source of Income: ${req.body.SponsorSourceOfIncome}</br>
-<br>Income Range: ${req.body.incomeRange}</br>
-`;
+  let hs_task_body = "";
+  let First_Name = "";
+  let Last_Name = "";
+  let Visa_Type = "";
+
+  Object.entries(req.body).forEach(([key, value]) => {
+    if (key === "Type of Visa") {
+      Visa_Type += `${value}`;
+    }
+    if (key === "First Name") {
+      First_Name += `${value}`;
+    }
+    if (key === "Last Name") {
+      Last_Name += `${value}`;
+    }
+    if (
+      key !== "First Name" &&
+      key !== "Last Name" &&
+      key !== "Visa Type" &&
+      key !== "contactId"
+    ) {
+      hs_task_body += `${key}: ${value} <br>`;
+    }
+  });
 
   const twoDaysLater = new Date();
   twoDaysLater.setDate(twoDaysLater.getDate() + 2);
@@ -29,10 +41,10 @@ export default async function handler(
   const reminder_timestamp_ms = oneDayBefore.getTime();
 
   const properties = {
-    hs_timestamp: hs_timestamp,
+    hs_timestamp: reminder_timestamp_ms,
     hs_task_body: hs_task_body,
     hubspot_owner_id: "805242080",
-    hs_task_subject: `New Contact  {${req.body.firstName} ${req.body.lastName}}`,
+    hs_task_subject: `ATTENTION!!! ${Visa_Type} for ${First_Name} ${Last_Name}`,
     hs_task_status: "WAITING",
     hs_task_priority: "HIGH",
   };
@@ -66,11 +78,9 @@ export default async function handler(
         SimplePublicObjectInputForCreate,
         { headers }
       );
-      console.log(apiResponse);
       res.status(200).json(apiResponse.data);
     } catch (error) {
       res.status(500).json({ error });
-      console.log("Error generated");
     }
   } else {
     res.setHeader("Allow", ["POST"]);
