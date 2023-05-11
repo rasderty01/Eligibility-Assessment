@@ -15,7 +15,7 @@ const FormCard: React.FC<FormCardProps> = ({
   imagePath,
 }) => {
   return (
-    <div className="p-10 m-4 bg-white dark:bg-gray-800 rounded hover:dark:shadow-slate-400 w-96 transition-all ease-in-out duration-300  hover:shadow">
+    <div className="p-10 m-4 bg-slate-100 dark:bg-gray-800 rounded hover:dark:shadow-slate-400 w-96 transition-all ease-in-out duration-300  hover:shadow">
       <Link className="flex flex-col" href={`/forms/${formId}`} passHref>
         {imagePath && (
           <Image

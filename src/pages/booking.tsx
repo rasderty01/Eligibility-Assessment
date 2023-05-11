@@ -1,15 +1,10 @@
-import { FC } from "react";
-
-interface bookingProps {}
-
-("use client");
+"use client";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import React, { useEffect, useRef, useState } from "react";
-import { BeatLoader, BarLoader } from "react-spinners";
+import { BeatLoader } from "react-spinners";
 import { useForm, SubmitHandler } from "react-hook-form";
-import getFormDataWithLabels from "@/utils/getFormDataWithLabels";
 import {
   PerrorClass,
   buttonClass,
@@ -17,6 +12,19 @@ import {
   inputErrorClass,
   labelClass,
 } from "@/utils/formstyles";
+
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 
 type Inputs = {
   firstName: string;
@@ -32,7 +40,7 @@ type Inputs = {
   typeofVisa: string;
 };
 
-const booking = () => {
+const Booking = () => {
   const formRef = useRef<HTMLFormElement>(null);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -63,8 +71,21 @@ const booking = () => {
     try {
       const createcontact = await axios.post("/api/free15mins", data);
       const contactId = createcontact.data.id;
+      const data1 = createcontact.data.results;
+
+      const obj = data1[0];
+      const hasBookedMeeting = obj.properties.has_booked_meeting;
+
+      console.log(hasBookedMeeting);
+
+      if (hasBookedMeeting === null || hasBookedMeeting === "No") {
+        toast.success("Congratulations! You're qualified.");
+      } else {
+
+      }
+
       const withID = { data, contactId };
-      toast.success("Congratulations! You're qualified.");
+
       setIsLoading(false);
     } catch (error) {
       toast.error("Failed to submit the form. Please try again.");
@@ -77,10 +98,12 @@ const booking = () => {
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
       <div className="bg-white dark:bg-gray-700 p-8 rounded-lg shadow-md w-full xs:max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg 2xl:max-w-2xl">
         <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-          Ready to explore UK? Find out if you qualify for a free 15-minute
-          consultation with our expert consultants!<br></br> <br></br> Just
-          enter your email below and let's see if we can help make your global
-          dreams a reality.
+          {`Ready to explore UK? Find out if you qualify for a free 15-minute consultation with our expert consultants!`}
+          <br></br>
+          <br></br>
+          {
+            "Just enter your email below and let's see if we can help make your global dreams a reality."
+          }
         </h1>
         <hr className="mb-3"></hr>
         <form ref={formRef} onSubmit={handleSubmit(onSubmit)}>
@@ -124,4 +147,4 @@ const booking = () => {
   );
 };
 
-export default booking;
+export default Booking;

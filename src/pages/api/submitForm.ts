@@ -17,8 +17,6 @@ export default async function handler(
 
   const SimplePublicObjectInputForCreate = { properties, associations: [] };
 
-  console.log(SimplePublicObjectInputForCreate);
-
   const hubspotAPIKey = process.env.SECRET_NAME;
 
   const apiUrl = "https://api.hubapi.com/crm/v3/objects/contacts";
