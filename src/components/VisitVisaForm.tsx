@@ -13,6 +13,10 @@ import {
   inputErrorClass,
   labelClass,
 } from "@/utils/formstyles";
+import { useRouter } from "next/router";
+import Redirect from "./ui/redirect";
+import Countdown from "./ui/redirect";
+import { useCountdown } from "./ui/CountdownContext";
 
 type Inputs = {
   firstName: string;
@@ -30,8 +34,11 @@ type Inputs = {
 
 const VisitVisaForm = () => {
   const formRef = useRef<HTMLFormElement>(null);
+  const router = useRouter();
+  const { startCountdown } = useCountdown();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [showCountdown, setShowCountdown] = useState(false);
 
   const {
     register,
@@ -64,6 +71,7 @@ const VisitVisaForm = () => {
       const withID = { ...dataWithLabels, contactId };
       const createtask = await axios.post("/api/createTask", withID);
       toast.success("Successfully submitted the form!");
+      startCountdown();
       setIsLoading(false);
     } catch (error) {
       toast.error("Failed to submit the form. Please try again.");

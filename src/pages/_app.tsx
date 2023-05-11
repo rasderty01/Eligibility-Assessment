@@ -3,14 +3,15 @@ import "react-toastify/dist/ReactToastify.css";
 import "../app/globals.css";
 import type { AppProps } from "next/app";
 import { ToastContainer } from "react-toastify";
-import { Callalertdialog } from "@/components/ui/callalertdialog";
+import { CountdownProvider } from "@/components/ui/CountdownContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <Callalertdialog />
-      <Component {...pageProps} />
-      <ToastContainer />;
+      <CountdownProvider>
+        <Component {...pageProps} />
+        <ToastContainer />;
+      </CountdownProvider>
     </>
   );
 }

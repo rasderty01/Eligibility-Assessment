@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 interface FormCardProps {
   formId: number;
@@ -15,7 +16,12 @@ const FormCard: React.FC<FormCardProps> = ({
   imagePath,
 }) => {
   return (
-    <div className="p-10 m-4 bg-slate-100 dark:bg-gray-800 rounded hover:dark:shadow-slate-400 w-96 transition-all ease-in-out duration-300  hover:shadow">
+    <motion.div
+      initial={{ scale: 0.9 }}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.7 }}
+      className="p-10 m-4 bg-slate-100 dark:bg-gray-800 rounded hover:dark:shadow-slate-400 max-w-lg transition-all ease-in-out duration-300 shadow-sm"
+    >
       <Link className="flex flex-col" href={`/forms/${formId}`} passHref>
         {imagePath && (
           <Image
@@ -31,7 +37,7 @@ const FormCard: React.FC<FormCardProps> = ({
         </h2>
         <p className="text-gray-600 dark:text-gray-400">{description}</p>
       </Link>
-    </div>
+    </motion.div>
   );
 };
 

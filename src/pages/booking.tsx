@@ -13,19 +13,8 @@ import {
   labelClass,
 } from "@/utils/formstyles";
 
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import { Callalertdialog } from "@/components/ui/callalertdialog";
+import { motion } from "framer-motion";
+import { useRouter } from "next/router";
 
 type Inputs = {
   firstName: string;
@@ -65,6 +54,7 @@ const Booking = () => {
       email: "",
     },
   });
+  const router = useRouter();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setIsLoading(true);
@@ -75,10 +65,13 @@ const Booking = () => {
       console.log(createcontact);
 
       setIsLoading(false);
-      AlertDialogTrigger;
+
       toast.success("Congratulations, You're qualified!");
+
+      setTimeout(() => {
+        router.push("https://meetings-eu1.hubspot.com/mgiukgroup/clone");
+      }, 5000);
     } catch (error) {
-      AlertDialogTrigger;
       toast.error(
         "Sorry, you've already qualified for our free 15-mins consultation."
       );
@@ -90,7 +83,11 @@ const Booking = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
-      <div className="bg-white dark:bg-gray-700 p-8 rounded-lg shadow-md w-full xs:max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg 2xl:max-w-2xl">
+      <motion.div
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        className="bg-white dark:bg-gray-700 transition-all ease-in-out duration-500 p-8 rounded-lg shadow-md w-full xs:max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg 2xl:max-w-2xl"
+      >
         <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
           {`Ready to explore UK? Find out if you qualify for a free 15-minute consultation with our expert consultants!`}
           <br></br>
@@ -137,7 +134,7 @@ const Booking = () => {
             </button>
           )}
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 };

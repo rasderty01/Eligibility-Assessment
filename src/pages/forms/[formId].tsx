@@ -9,6 +9,9 @@ import MarriageVisa from "@/components/MarriageVisa";
 import UnmarriedVistVisa from "@/components/UnmarriedVisitVisa";
 import { backButton, h1element } from "@/utils/formstyles";
 import { BarLoader } from "react-spinners";
+import { motion } from "framer-motion";
+import Countdown from "@/components/ui/redirect";
+import { useCountdown } from "@/components/ui/CountdownContext";
 
 const formMapping = {
   "1": {
@@ -36,6 +39,7 @@ const formMapping = {
 const FormPage = () => {
   const router = useRouter();
   const { formId } = router.query;
+  const { showCountdown } = useCountdown();
 
   const [formDetails, setFormDetails] = useState<{
     title: string;
@@ -73,22 +77,31 @@ const FormPage = () => {
       {initialLoading ? (
         <BarLoader color="#36d7b7" height={10} width={200} className="my-10" />
       ) : (
-        <div className="bg-white dark:bg-gray-700 p-8 rounded-lg shadow-md w-full xs:max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg 2xl:max-w-2xl mx-auto ">
-          <button
-            name="backButton"
-            aria-label="backButton"
-            id="backButton"
-            type="button"
-            onClick={BacktoMainPage}
-            className={backButton}
-          >
-            Back to Main
-          </button>
+        <>
+          {showCountdown && <Countdown redirectTo="/booking" />}
+          {!showCountdown && (
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              className="bg-white dark:bg-gray-700 p-8 transition-all ease-in-out duration-500 rounded-lg shadow-md w-full xs:max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg 2xl:max-w-2xl mx-auto "
+            >
+              <button
+                name="backButton"
+                aria-label="backButton"
+                id="backButton"
+                type="button"
+                onClick={BacktoMainPage}
+                className={backButton}
+              >
+                Back to Main
+              </button>
 
-          <h1 className={h1element}>{formDetails?.title} Form</h1>
+              <h1 className={h1element}>{formDetails?.title} Form</h1>
 
-          {renderForm()}
-        </div>
+              {renderForm()}
+            </motion.div>
+          )}
+        </>
       )}
     </div>
   );
