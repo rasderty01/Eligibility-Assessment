@@ -1,14 +1,16 @@
-import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogTitle, AlertDialogDescription, AlertDialogCancel, AlertDialogAction } from "@radix-ui/react-alert-dialog";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogCancel,
+  AlertDialogAction,
+} from "@radix-ui/react-alert-dialog";
 import { AlertDialogHeader, AlertDialogFooter } from "./alert-dialog";
-import { Button } from "./button";
 
-
-const callalertdialog = ({}) => {
+const Callalertdialog = ({}) => {
   return (
     <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Button variant="outline">Show Dialog</Button>
-      </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
@@ -24,6 +26,6 @@ const callalertdialog = ({}) => {
       </AlertDialogContent>
     </AlertDialog>
   );
-}
+};
 
-export default callalertdialog
+export { Callalertdialog };

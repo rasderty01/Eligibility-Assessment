@@ -25,6 +25,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
+import { Callalertdialog } from "@/components/ui/callalertdialog";
 
 type Inputs = {
   firstName: string;
@@ -70,25 +71,18 @@ const Booking = () => {
 
     try {
       const createcontact = await axios.post("/api/free15mins", data);
-      const contactId = createcontact.data.id;
-      const data1 = createcontact.data.results;
 
-      const obj = data1[0];
-      const hasBookedMeeting = obj.properties.has_booked_meeting;
-
-      console.log(hasBookedMeeting);
-
-      if (hasBookedMeeting === null || hasBookedMeeting === "No") {
-        toast.success("Congratulations! You're qualified.");
-      } else {
-
-      }
-
-      const withID = { data, contactId };
+      console.log(createcontact);
 
       setIsLoading(false);
+      AlertDialogTrigger;
+      toast.success("Congratulations, You're qualified!");
     } catch (error) {
-      toast.error("Failed to submit the form. Please try again.");
+      AlertDialogTrigger;
+      toast.error(
+        "Sorry, you've already qualified for our free 15-mins consultation."
+      );
+      console.log(error);
       setIsLoading(false);
       // Handle error, e.g., show an error message
     }
@@ -105,6 +99,7 @@ const Booking = () => {
             "Just enter your email below and let's see if we can help make your global dreams a reality."
           }
         </h1>
+
         <hr className="mb-3"></hr>
         <form ref={formRef} onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col mb-4 space-y-4">
