@@ -1,3 +1,5 @@
+import { string } from "yup";
+
 const { SecretManagerServiceClient } = require("@google-cloud/secret-manager");
 const dotenv = require("dotenv");
 
@@ -17,3 +19,5 @@ async function accessSecretVersion(secretName) {
 }
 
 module.exports = accessSecretVersion;
+
+//resolvle the secretname
