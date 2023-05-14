@@ -14,6 +14,7 @@ import {
   inputErrorClass,
   PerrorClass,
 } from "@/utils/formstyles";
+import { useCountdown } from "./ui/CountdownContext";
 
 type Inputs = {
   firstName: string;
@@ -32,6 +33,7 @@ type Inputs = {
 const SpousalVisa = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { startCountdown } = useCountdown();
 
   const {
     register,
@@ -65,8 +67,10 @@ const SpousalVisa = () => {
       const createtask = await axios.post("/api/createTask", withID);
       toast.success("Sucessfully submitted the form!");
       setIsLoading(false);
+      startCountdown();
     } catch (error) {
       toast.error("Failed to submit the form. Please try again.");
+
       setIsLoading(false);
       // Handle error, e.g., show an error message
     }
@@ -158,8 +162,8 @@ const SpousalVisa = () => {
             </label>
             <input
               id="whatsappNumber"
-              type="number"
-              placeholder="WhatsApp Number"
+              type="text"
+              placeholder="+63 or +44"
               {...register("whatsappNumber", {
                 required: "WhatsApp Number is required",
               })}
@@ -204,10 +208,7 @@ const SpousalVisa = () => {
             />
           </div>
           <div className="flex flex-col">
-            <label
-              htmlFor="PlaceOfMarriage"
-              className="text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="PlaceOfMarriage" className={labelClass}>
               Place of Marriage
             </label>
             <input
