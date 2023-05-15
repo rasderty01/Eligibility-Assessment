@@ -1,5 +1,3 @@
-import { string } from "yup";
-
 const { SecretManagerServiceClient } = require("@google-cloud/secret-manager");
 const dotenv = require("dotenv");
 
