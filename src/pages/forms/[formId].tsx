@@ -59,7 +59,7 @@ const FormPage = () => {
   };
 
   const BacktoMainPage = () => {
-    router.push("/forms");
+    router.push("/");
   };
 
   const [initialLoading, setInitialLoading] = useState(true);

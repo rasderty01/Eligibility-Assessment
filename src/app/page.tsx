@@ -1,5 +1,5 @@
 import RootLayout from "./layout";
-import FormsPage from "@/pages/forms";
+import FormsPage from "@/pages/index";
 
 // Use dynamic imports to load the FormsPage component
 

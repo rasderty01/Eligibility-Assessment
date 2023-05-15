@@ -10,31 +10,31 @@ const forms = [
   {
     id: 1,
     title: "Visit Visa",
-    description: "Apply for a visit visa.",
+    description: "Apply for a Visit Visa.",
     imagePath: "/images/Visit Visa.png",
   },
   {
     id: 2,
     title: "Fiance Visa",
-    description: "Apply for a fiance visa.",
+    description: "Apply for a Fiance Visa.",
     imagePath: "/images/Fiance Visa.png",
   },
   {
     id: 3,
     title: "Spousal Visa",
-    description: "Apply for a spousal visa.",
+    description: "Apply for a Spousal Visa.",
     imagePath: "/images/Spousal Visa.png",
   },
   {
     id: 4,
     title: "Marriage Visa",
-    description: "Apply for a marriage visa.",
+    description: "Apply for a Marriage Visa.",
     imagePath: "/images/Marriage Visa.png",
   },
   {
     id: 5,
     title: "Unmarried Visit Visa",
-    description: "Apply for an unmarried visit visa.",
+    description: "Apply for an Unmarried Visit Visa.",
     imagePath: "/images/Unmarried Visit Visa.png",
   },
 ];
