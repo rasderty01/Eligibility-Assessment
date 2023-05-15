@@ -34,11 +34,9 @@ type Inputs = {
 
 const VisitVisaForm = () => {
   const formRef = useRef<HTMLFormElement>(null);
-  const router = useRouter();
   const { startCountdown } = useCountdown();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [showCountdown, setShowCountdown] = useState(false);
 
   const {
     register,
@@ -50,7 +48,7 @@ const VisitVisaForm = () => {
       firstName: "",
       lastName: "",
       email: "",
-      whatsappNumber: "No Data",
+      whatsappNumber: "",
       yesNoQuestion: "No Data",
       RelationshipWithSponsor: "No Data",
       metWithSponsor: "No Data",
@@ -166,8 +164,8 @@ const VisitVisaForm = () => {
             </label>
             <input
               id="whatsappNumber"
-              type="number"
-              placeholder="WhatsApp Number"
+              type="text"
+              placeholder="+63 or +44"
               {...register("whatsappNumber", {
                 required: "WhatsApp Number is required",
               })}

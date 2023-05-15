@@ -15,6 +15,8 @@ import {
 
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
+import Countdown from "@/components/ui/redirect";
+import { useCountdown } from "@/components/ui/CountdownContext";
 
 type Inputs = {
   firstName: string;
@@ -35,6 +37,13 @@ const Booking = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [initialLoading, setInitialLoading] = useState(true);
+
+  // Inside Booking component
+  const { showCountdown, startCountdown, resetCountdown } = useCountdown();
+
+  useEffect(() => {
+    resetCountdown();
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -65,12 +74,8 @@ const Booking = () => {
       console.log(createcontact);
 
       setIsLoading(false);
-
       toast.success("Congratulations, You're qualified!");
-
-      setTimeout(() => {
-        router.push("https://meetings-eu1.hubspot.com/mgiukgroup/clone");
-      }, 5000);
+      startCountdown();
     } catch (error) {
       toast.error(
         "Sorry, you've already qualified for our free 15-mins consultation."
@@ -83,58 +88,63 @@ const Booking = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
-      <motion.div
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        className="bg-white dark:bg-gray-700 transition-all ease-in-out duration-500 p-8 rounded-lg shadow-md w-full xs:max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg 2xl:max-w-2xl"
-      >
-        <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-          {`Ready to explore UK? Find out if you qualify for a free 15-minute consultation with our expert consultants!`}
-          <br></br>
-          <br></br>
-          {
-            "Just enter your email below and let's see if we can help make your global dreams a reality."
-          }
-        </h1>
+      {showCountdown && (
+        <Countdown redirectTo="https://meetings-eu1.hubspot.com/mgiukgroup/clone" />
+      )}
+      {!showCountdown && (
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          className="bg-white dark:bg-gray-700 transition-all ease-in-out duration-500 p-8 rounded-lg shadow-md w-full xs:max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg 2xl:max-w-2xl"
+        >
+          <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+            {`Ready to explore UK? Find out if you qualify for a free 15-minute consultation with our expert consultants!`}
+            <br></br>
+            <br></br>
+            {
+              "Just enter your email below and let's see if we can help make your global dreams a reality."
+            }
+          </h1>
 
-        <hr className="mb-3"></hr>
-        <form ref={formRef} onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex flex-col mb-4 space-y-4">
-            <label htmlFor="email" className={`${labelClass} 2xl:text-2xl`}>
-              Email
-            </label>
-            <input
-              id="email"
-              type="email"
-              placeholder="john.doe@example.com"
-              autoComplete="email"
-              {...register("email", {
-                required: "Email is required",
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "Invalid email address",
-                },
-              })}
-              className={`${inputBaseClass} ${
-                errors.email ? inputErrorClass : "border-gray-300"
-              }`}
-            />
-            {errors.email && (
-              <p className={PerrorClass}>{errors.email.message}</p>
+          <hr className="mb-3"></hr>
+          <form ref={formRef} onSubmit={handleSubmit(onSubmit)}>
+            <div className="flex flex-col mb-4 space-y-4">
+              <label htmlFor="email" className={`${labelClass} 2xl:text-2xl`}>
+                Email
+              </label>
+              <input
+                id="email"
+                type="email"
+                placeholder="john.doe@example.com"
+                autoComplete="email"
+                {...register("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: "Invalid email address",
+                  },
+                })}
+                className={`${inputBaseClass} ${
+                  errors.email ? inputErrorClass : "border-gray-300"
+                }`}
+              />
+              {errors.email && (
+                <p className={PerrorClass}>{errors.email.message}</p>
+              )}
+            </div>
+            {isLoading ? (
+              <BeatLoader size={10} color="#123abc" loading={isLoading} />
+            ) : (
+              <button
+                type="submit"
+                className={`w-full ${buttonClass} xs:max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg 2xl:max-w-2xl`}
+              >
+                Am I Qualified?
+              </button>
             )}
-          </div>
-          {isLoading ? (
-            <BeatLoader size={10} color="#123abc" loading={isLoading} />
-          ) : (
-            <button
-              type="submit"
-              className={`w-full ${buttonClass} xs:max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg 2xl:max-w-2xl`}
-            >
-              Am I Qualified?
-            </button>
-          )}
-        </form>
-      </motion.div>
+          </form>
+        </motion.div>
+      )}
     </div>
   );
 };

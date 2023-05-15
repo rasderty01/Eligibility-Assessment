@@ -4,6 +4,7 @@ const CountdownContext = createContext({
   showCountdown: false,
   startCountdown: () => {},
   stopCountdown: () => {},
+  resetCountdown: () => {},
 });
 
 export const useCountdown = () => useContext(CountdownContext);
@@ -19,9 +20,13 @@ export const CountdownProvider = ({ children }: { children: ReactNode }) => {
     setShowCountdown(false);
   };
 
+  const resetCountdown = () => {
+    setShowCountdown(false);
+  };
+
   return (
     <CountdownContext.Provider
-      value={{ showCountdown, startCountdown, stopCountdown }}
+      value={{ showCountdown, startCountdown, stopCountdown, resetCountdown }}
     >
       {children}
     </CountdownContext.Provider>

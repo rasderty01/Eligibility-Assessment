@@ -8,6 +8,7 @@ interface CountdownProps {
 
 const Countdown: React.FC<CountdownProps> = ({ redirectTo }) => {
   const [count, setCount] = useState(5);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -23,13 +24,20 @@ const Countdown: React.FC<CountdownProps> = ({ redirectTo }) => {
 
   return (
     <motion.div
-      className="fixed inset-0 flex items-center justify-center dark:text-gray-300 text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
+      className="fixed inset-0 flex items-center justify-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl"
+      initial={{ opacity: 0, color: "#FFFFFF" }}
+      animate={{
+        opacity: 1,
+        color: ["#FF0000", "#0000FF", "#00FF00", "#FFFF00", "#FF0000"],
+      }}
+      transition={{
+        duration: 5,
+        ease: "linear",
+        loop: Infinity,
+      }}
       exit={{ opacity: 0 }}
     >
-      Redirecting you in {count}
+      Redirecting you in {count} ...
     </motion.div>
   );
 };

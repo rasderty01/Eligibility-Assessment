@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 const credentialsPath = process.env.GOOGLE_APPLICATION_CREDENTIALS;
 dotenv.config();
 
-async function accessSecretVersion(secretName) {
+async function accessSecretVersion(secretName: string) {
   const client = new SecretManagerServiceClient({
     keyFilename: credentialsPath,
   });
