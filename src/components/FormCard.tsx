@@ -19,7 +19,7 @@ const FormCard: React.FC<FormCardProps> = ({
     <motion.div
       initial={{ scale: 0.9 }}
       whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.7 }}
+      whileTap={{ scale: [0.7] }}
       className="p-10 m-4 bg-slate-100 dark:bg-gray-800 rounded hover:dark:shadow-slate-400 max-w-lg transition-all ease-in-out duration-300 shadow-sm"
     >
       <Link className="flex flex-col" href={`/forms/${formId}`} passHref>

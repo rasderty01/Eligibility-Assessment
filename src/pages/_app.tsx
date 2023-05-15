@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <CountdownProvider>
         <Component {...pageProps} />
-        <ToastContainer />;
+        <ToastContainer />
       </CountdownProvider>
     </>
   );
