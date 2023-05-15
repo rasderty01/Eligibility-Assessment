@@ -17,6 +17,17 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import Countdown from "@/components/ui/redirect";
 import { useCountdown } from "@/components/ui/CountdownContext";
+import {
+  AlertDialogAction,
+  AlertDialogFooter,
+} from "@/components/ui/alert-dialog";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogCancel,
+} from "@/components/ui/alert-dialog";
 
 type Inputs = {
   firstName: string;
@@ -34,16 +45,27 @@ type Inputs = {
 
 const Booking = () => {
   const formRef = useRef<HTMLFormElement>(null);
+  const router = useRouter();
 
   const [isLoading, setIsLoading] = useState(false);
   const [initialLoading, setInitialLoading] = useState(true);
+
+  const [isErrorDialogOpen, setIsErrorDialogOpen] = useState(false);
+
+  const closeErrorDialog = () => {
+    setIsErrorDialogOpen(false);
+  };
+
+  const facebook = () => {
+    router.push("https://www.facebook.com/MGiUKGroup");
+  };
 
   // Inside Booking component
   const { showCountdown, startCountdown, resetCountdown } = useCountdown();
 
   useEffect(() => {
     resetCountdown();
-  }, []);
+  }, [resetCountdown]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -56,14 +78,12 @@ const Booking = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<Inputs>({
     defaultValues: {
       email: "",
     },
   });
-  const router = useRouter();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setIsLoading(true);
@@ -77,10 +97,8 @@ const Booking = () => {
       toast.success("Congratulations, You're qualified!");
       startCountdown();
     } catch (error) {
-      toast.error(
-        "Sorry, you've already qualified for our free 15-mins consultation."
-      );
       console.log(error);
+      setIsErrorDialogOpen(true);
       setIsLoading(false);
       // Handle error, e.g., show an error message
     }
@@ -88,6 +106,19 @@ const Booking = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
+      <AlertDialog open={isErrorDialogOpen} onOpenChange={setIsErrorDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogTitle className="text-2xl font-medium text-gray-700 dark:text-gray-300">
+            {"Sorry, you've already qualified for free consultation ☹️"}
+          </AlertDialogTitle>
+          <AlertDialogDescription className="text-lg font-medium text-gray-700 dark:text-gray-300">
+            {"Please reach out to our Facebook page for paid consultations."}
+          </AlertDialogDescription>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={facebook}>Close</AlertDialogCancel>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
       {showCountdown && (
         <Countdown redirectTo="https://meetings-eu1.hubspot.com/mgiukgroup/clone" />
       )}

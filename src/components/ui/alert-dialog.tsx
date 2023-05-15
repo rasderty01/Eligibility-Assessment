@@ -2,9 +2,9 @@
 
 import * as React from "react";
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
-
 import { clsx } from "clsx";
 import { buttonVariants } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 const AlertDialog = AlertDialogPrimitive.Root;
 
@@ -16,9 +16,23 @@ const AlertDialogPortal = ({
   ...props
 }: AlertDialogPrimitive.AlertDialogPortalProps) => (
   <AlertDialogPrimitive.Portal className={clsx(className)} {...props}>
-    <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center">
+    <motion.div
+      initial={{
+        scale: 0,
+        opacity: 1,
+      }}
+      animate={{
+        scale: 1,
+        opacity: 1,
+      }}
+      transition={{
+        duration: 0.3,
+        ease: "linear",
+      }}
+      className="fixed inset-0 z-50 flex items-end justify-center sm:items-center"
+    >
       {children}
-    </div>
+    </motion.div>
   </AlertDialogPrimitive.Portal>
 );
 AlertDialogPortal.displayName = AlertDialogPrimitive.Portal.displayName;
@@ -90,7 +104,7 @@ const AlertDialogTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <AlertDialogPrimitive.Title
     ref={ref}
-    className={clsx("text-lg font-semibold dark:text-white", className)}
+    className={clsx(className)}
     {...props}
   />
 ));
@@ -102,10 +116,7 @@ const AlertDialogDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <AlertDialogPrimitive.Description
     ref={ref}
-    className={clsx(
-      "text-sm text-muted-foreground dark:text-gray-300",
-      className
-    )}
+    className={clsx(className)}
     {...props}
   />
 ));
@@ -131,8 +142,9 @@ const AlertDialogCancel = React.forwardRef<
   <AlertDialogPrimitive.Cancel
     ref={ref}
     className={clsx(
-      buttonVariants({ variant: "outline" }),
+      buttonVariants({ variant: "default" }),
       "mt-2 sm:mt-0",
+
       className
     )}
     {...props}

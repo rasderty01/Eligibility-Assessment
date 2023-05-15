@@ -7,7 +7,7 @@ const nextConfig = {
 
 module.exports = nextConfig;
 
-const accessSecretVersion = require("./src/pages/api/getSecrets.ts");
+const accessSecretVersion = require("./src/pages/api/getSecrets.js");
 
 module.exports = async () => {
   const secretValue = await accessSecretVersion("hubspot");
