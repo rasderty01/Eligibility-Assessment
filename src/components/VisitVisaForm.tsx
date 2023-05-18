@@ -13,9 +13,6 @@ import {
   inputErrorClass,
   labelClass,
 } from "@/utils/formstyles";
-import { useRouter } from "next/router";
-import Redirect from "./ui/redirect";
-import Countdown from "./ui/redirect";
 import { useCountdown } from "./ui/CountdownContext";
 
 type Inputs = {

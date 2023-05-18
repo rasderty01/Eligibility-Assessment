@@ -6,3 +6,8 @@
 @import "react-toastify/dist/ReactToastify.css";
 
 /* Add your global styles here */
+body {
+  background-image: url("/images/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
