@@ -56,7 +56,7 @@ const SameSex = () => {
       SponsorMaritalStatus: "",
       SponsorSourceOfIncome: "",
       SpousalBenefits: "",
-      typeofVisa: "Unmarried Visit Visa",
+      typeofVisa: "Same-sex Partner Visa",
     },
   });
   const onSubmit: SubmitHandler<Inputs> = async (data) => {

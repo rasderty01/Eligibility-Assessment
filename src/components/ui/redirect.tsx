@@ -9,6 +9,8 @@ interface CountdownProps {
 const Countdown: React.FC<CountdownProps> = ({ redirectTo }) => {
   const [count, setCount] = useState(5);
 
+  console.log("Countdown is being rendered");
+
   const router = useRouter();
 
   useEffect(() => {

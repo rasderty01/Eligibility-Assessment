@@ -65,7 +65,9 @@ const Booking = () => {
 
   useEffect(() => {
     resetCountdown();
-  }, [resetCountdown]);
+  }, []); // Note the empty array here
+
+  console.log("Reset Countdown has been called", resetCountdown);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -91,13 +93,11 @@ const Booking = () => {
     try {
       const createcontact = await axios.post("/api/free15mins", data);
 
-      console.log(createcontact);
-
-      setIsLoading(false);
       toast.success("Congratulations, You're qualified!");
       startCountdown();
+      console.log("StartCountdown has been called", startCountdown);
+      setIsLoading(false);
     } catch (error) {
-      console.log(error);
       setIsErrorDialogOpen(true);
       setIsLoading(false);
       // Handle error, e.g., show an error message
@@ -119,63 +119,65 @@ const Booking = () => {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-      {showCountdown && (
-        <Countdown redirectTo="https://meetings-eu1.hubspot.com/mgiukgroup/clone" />
-      )}
-      {!showCountdown && (
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          className="bg-white dark:bg-gray-700 transition-all ease-in-out duration-500 p-8 rounded-lg shadow-md w-full xs:max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg 2xl:max-w-2xl"
-        >
-          <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-            {`Ready to explore UK? Find out if you qualify for a free 15-minute consultation with our expert consultants!`}
-            <br></br>
-            <br></br>
-            {
-              "Just enter your email below and let's see if we can help make your global dreams a reality."
-            }
-          </h1>
+      <>
+        {showCountdown && (
+          <Countdown redirectTo="https://meetings-eu1.hubspot.com/mgiukgroup/clone" />
+        )}
+        {!showCountdown && (
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            className="bg-white dark:bg-gray-700 transition-all ease-in-out duration-500 p-8 rounded-lg shadow-md w-full xs:max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg 2xl:max-w-2xl"
+          >
+            <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+              {`Ready to explore UK? Find out if you qualify for a free 15-minute consultation with our expert consultants!`}
+              <br></br>
+              <br></br>
+              {
+                "Just enter your email below and let's see if we can help make your global dreams a reality."
+              }
+            </h1>
 
-          <hr className="mb-3"></hr>
-          <form ref={formRef} onSubmit={handleSubmit(onSubmit)}>
-            <div className="flex flex-col mb-4 space-y-4">
-              <label htmlFor="email" className={`${labelClass} 2xl:text-2xl`}>
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                placeholder="john.doe@example.com"
-                autoComplete="email"
-                {...register("email", {
-                  required: "Email is required",
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: "Invalid email address",
-                  },
-                })}
-                className={`${inputBaseClass} ${
-                  errors.email ? inputErrorClass : "border-gray-300"
-                }`}
-              />
-              {errors.email && (
-                <p className={PerrorClass}>{errors.email.message}</p>
+            <hr className="mb-3"></hr>
+            <form ref={formRef} onSubmit={handleSubmit(onSubmit)}>
+              <div className="flex flex-col mb-4 space-y-4">
+                <label htmlFor="email" className={`${labelClass} 2xl:text-2xl`}>
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="john.doe@example.com"
+                  autoComplete="email"
+                  {...register("email", {
+                    required: "Email is required",
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: "Invalid email address",
+                    },
+                  })}
+                  className={`${inputBaseClass} ${
+                    errors.email ? inputErrorClass : "border-gray-300"
+                  }`}
+                />
+                {errors.email && (
+                  <p className={PerrorClass}>{errors.email.message}</p>
+                )}
+              </div>
+              {isLoading ? (
+                <BeatLoader size={10} color="#123abc" loading={isLoading} />
+              ) : (
+                <button
+                  type="submit"
+                  className={`w-full ${buttonClass} xs:max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg 2xl:max-w-2xl`}
+                >
+                  Am I Qualified?
+                </button>
               )}
-            </div>
-            {isLoading ? (
-              <BeatLoader size={10} color="#123abc" loading={isLoading} />
-            ) : (
-              <button
-                type="submit"
-                className={`w-full ${buttonClass} xs:max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg 2xl:max-w-2xl`}
-              >
-                Am I Qualified?
-              </button>
-            )}
-          </form>
-        </motion.div>
-      )}
+            </form>
+          </motion.div>
+        )}
+      </>
     </div>
   );
 };

@@ -46,7 +46,13 @@ export default async function handler(
 
       let contactproperties = {};
 
-      if (has_booked_meeting === null || has_booked_meeting === "false") {
+      console.log("Hasbooked", has_booked_meeting);
+
+      if (
+        has_booked_meeting === "" ||
+        has_booked_meeting === "false" ||
+        has_booked_meeting === null
+      ) {
         contactproperties = {
           has_booked_meeting: true,
         };
@@ -63,7 +69,7 @@ export default async function handler(
             headers,
           }
         );
-        console.log(apiresponse2);
+
         res.status(200).json(apiresponse2.data);
       } catch (error) {
         res.status(500).json({ error });

@@ -41,7 +41,7 @@ const forms = [
   {
     id: 6,
     title: "Same-sex Partner Visa",
-    description: "Apply for an Same-sex Partner Visa.",
+    description: "Apply for a Same-sex Partner Visa.",
     imagePath: "/images/Same Sex.png",
   },
 ];
