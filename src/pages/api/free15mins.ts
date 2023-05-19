@@ -46,8 +46,6 @@ export default async function handler(
 
       let contactproperties = {};
 
-      console.log("Hasbooked", has_booked_meeting);
-
       if (
         has_booked_meeting === "" ||
         has_booked_meeting === "false" ||
@@ -73,11 +71,9 @@ export default async function handler(
         res.status(200).json(apiresponse2.data);
       } catch (error) {
         res.status(500).json({ error });
-        console.log("Error generated");
       }
     } catch (error) {
       res.status(500).json({ error });
-      console.log("Error generated");
     }
   }
 }

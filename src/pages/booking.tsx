@@ -51,6 +51,7 @@ const Booking = () => {
   const [initialLoading, setInitialLoading] = useState(true);
 
   const [isErrorDialogOpen, setIsErrorDialogOpen] = useState(false);
+  const [isErrorDialogOpen500, setIsErrorDialogOpen500] = useState(false);
 
   const closeErrorDialog = () => {
     setIsErrorDialogOpen(false);
@@ -60,14 +61,20 @@ const Booking = () => {
     router.push("https://www.facebook.com/MGiUKGroup");
   };
 
+  const MainPage = () => {
+    router.push("https://www.mgiukgroup.com");
+  };
+
+  const Error500 = () => {
+    router.push("/");
+  };
+
   // Inside Booking component
   const { showCountdown, startCountdown, resetCountdown } = useCountdown();
 
   useEffect(() => {
     resetCountdown();
   }, []); // Note the empty array here
-
-  console.log("Reset Countdown has been called", resetCountdown);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -95,10 +102,17 @@ const Booking = () => {
 
       toast.success("Congratulations, You're qualified!");
       startCountdown();
-      console.log("StartCountdown has been called", startCountdown);
+
       setIsLoading(false);
-    } catch (error) {
-      setIsErrorDialogOpen(true);
+    } catch (error: any) {
+      if (error.response.status === 500) {
+        setIsErrorDialogOpen500(true);
+      }
+
+      if (error.response.status === 400) {
+        setIsErrorDialogOpen(true);
+      }
+
       setIsLoading(false);
       // Handle error, e.g., show an error message
     }
@@ -106,6 +120,24 @@ const Booking = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
+      <AlertDialog
+        open={isErrorDialogOpen500}
+        onOpenChange={setIsErrorDialogOpen500}
+      >
+        <AlertDialogContent>
+          <AlertDialogTitle className="text-2xl font-medium text-gray-700 dark:text-gray-300">
+            {"Email address not found ❗❗❗"}
+          </AlertDialogTitle>
+          <AlertDialogDescription className="text-lg font-medium text-gray-700 dark:text-gray-300">
+            {"Would you like to take our Eligibility Assessment?"}
+          </AlertDialogDescription>
+          <AlertDialogFooter>
+            <AlertDialogAction onClick={Error500}>Yes</AlertDialogAction>
+            <AlertDialogCancel onClick={MainPage}>No</AlertDialogCancel>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
       <AlertDialog open={isErrorDialogOpen} onOpenChange={setIsErrorDialogOpen}>
         <AlertDialogContent>
           <AlertDialogTitle className="text-2xl font-medium text-gray-700 dark:text-gray-300">
