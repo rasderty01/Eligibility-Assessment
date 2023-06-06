@@ -53,7 +53,7 @@ const FianceVisa = () => {
       FianceFinancialRequirement: "",
       FianceSponsorMaritalStatus: "",
       FianceSponsorSourceOfIncome: "",
-      typeofVisa: "Fiance Visa",
+      typeofVisa: "Fiancé Visa",
     },
   });
 

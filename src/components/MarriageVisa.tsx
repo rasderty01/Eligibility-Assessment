@@ -55,7 +55,7 @@ const MarriageVisa = () => {
       MaritalStatus: "",
       MarriageSponsorMaritalStatus: "",
       SpousalBenefits: "",
-      typeofVisa: "Marriage Visa",
+      typeofVisa: "Marriage Visit Visa Processing",
     },
   });
 

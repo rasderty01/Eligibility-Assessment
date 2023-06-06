@@ -12,6 +12,7 @@ export default async function handler(
     firstname: req.body.firstName,
     lastname: req.body.lastName,
     hs_whatsapp_phone_number: req.body.whatsappNumber,
+    visa_type: req.body.typeofVisa,
     hubspot_owner_id: "805242080",
   };
 
@@ -36,7 +37,6 @@ export default async function handler(
       res.status(200).json(apiResponse.data);
     } catch (error) {
       res.status(500).json({ error });
-      console.log("Error generated");
     }
   }
 }

@@ -62,7 +62,6 @@ const SameSex = () => {
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setIsLoading(true);
     const dataWithLabels = getFormDataWithLabels(formRef.current);
-    console.log(data);
 
     try {
       const createcontact = await axios.post("/api/submitForm", data);

@@ -61,8 +61,6 @@ export default async function handler(
     ],
   };
 
-  console.log(SimplePublicObjectInputForCreate);
-
   const hubspotAPIKey = process.env.SECRET_NAME;
 
   const apiUrl = "https://api.hubapi.com/crm/v3/objects/tasks";

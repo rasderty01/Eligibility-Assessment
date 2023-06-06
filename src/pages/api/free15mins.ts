@@ -8,7 +8,7 @@ export default async function handler(
 ) {
   const { method, body } = req;
 
-  const properties = ["has_booked_meeting"];
+  const properties = ["has_booked_meeting", "visa_type"];
 
   const filters = [
     {
@@ -42,6 +42,7 @@ export default async function handler(
       let value = apiResponse.data.results;
       let obj = value[0];
       let has_booked_meeting = obj.properties.has_booked_meeting;
+      let visa_type = obj.properties.visa_type;
       let contactId = obj.id;
 
       let contactproperties = {};
@@ -68,7 +69,12 @@ export default async function handler(
           }
         );
 
-        res.status(200).json(apiresponse2.data);
+        const data = {
+          apiresponse2: apiresponse2.data,
+          visa_type: visa_type,
+        };
+
+        res.status(200).json(data);
       } catch (error) {
         res.status(500).json({ error });
       }

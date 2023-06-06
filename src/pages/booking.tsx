@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import React, { useEffect, useRef, useState } from "react";
 import { BeatLoader } from "react-spinners";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, set } from "react-hook-form";
 import {
   PerrorClass,
   buttonClass,
@@ -53,6 +53,8 @@ const Booking = () => {
   const [isErrorDialogOpen, setIsErrorDialogOpen] = useState(false);
   const [isErrorDialogOpen500, setIsErrorDialogOpen500] = useState(false);
 
+  const [bookingurl, setBookingUrl] = useState("");
+
   const closeErrorDialog = () => {
     setIsErrorDialogOpen(false);
   };
@@ -97,10 +99,26 @@ const Booking = () => {
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setIsLoading(true);
 
+    const booking = {
+      visitvisa: "https://meetings-eu1.hubspot.com/mgiukgroup/clone",
+      settlement: "https://meetings-eu1.hubspot.com/mgiukgroup/clone-clone",
+    };
+
     try {
       const createcontact = await axios.post("/api/free15mins", data);
 
       toast.success("Congratulations, You're qualified!");
+
+      let visa_type = createcontact.data.visa_type;
+
+      if (visa_type === "Visit Visa") {
+        setBookingUrl(booking.visitvisa);
+      } else {
+        setBookingUrl(booking.settlement);
+      }
+
+      console.log("check here", createcontact.data.visa_type);
+
       startCountdown();
 
       setIsLoading(false);
@@ -152,9 +170,7 @@ const Booking = () => {
         </AlertDialogContent>
       </AlertDialog>
       <>
-        {showCountdown && (
-          <Countdown redirectTo="https://meetings-eu1.hubspot.com/mgiukgroup/clone" />
-        )}
+        {showCountdown && <Countdown redirectTo={bookingurl} />}
         {!showCountdown && (
           <motion.div
             initial={{ scale: 0 }}
