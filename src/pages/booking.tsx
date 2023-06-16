@@ -100,8 +100,10 @@ const Booking = () => {
     setIsLoading(true);
 
     const booking = {
-      visitvisa: "https://meetings-eu1.hubspot.com/mgiukgroup/clone",
-      settlement: "https://meetings-eu1.hubspot.com/mgiukgroup/clone-clone",
+      visitvisa:
+        "https://meetings-eu1.hubspot.com/office-mgiukgroup/15mins-mwf",
+      settlement:
+        "https://meetings-eu1.hubspot.com/office-mgiukgroup/15mins-tth",
     };
 
     try {
